@@ -71,7 +71,7 @@ shell_command:
 `/config/custom_components/tuya_local/devices/`
 - פתח את קובץ הלוג:
 `/config/protected_files/tuya_restore/tuya_restore.log`
-אם הכל תקין, תראה שם את ההודעות שנכתבו.
+<br> אם הכל תקין, תראה שם את ההודעות שנכתבו.
 
 
 
