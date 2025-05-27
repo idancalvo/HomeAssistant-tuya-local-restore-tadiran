@@ -5,7 +5,7 @@
 <br> כך תוכל לשדרג את Tuya Local בלי לדאוג למחיקת הקובץ.
 
 
-## 📁 שלב 1: יצירת תיקיית גיבוי 
+## 📁 שלב 1: יצירת תיקיית יעודית
 ניצור את התיקייה:<br>
 `/config/protected_files/tuya_restore`
 
@@ -24,7 +24,7 @@
 
 
 
-## 🔒 שלב 3: מתן הרשאות הרצה לסקריפט ותיקון שגיאת סוג קובץ
+## 🔒 שלב 3: מתן הרשאות הרצה לסקריפט ותיקון שגיאת בקובץ
 
 בטרמינל של Home Assistant, הרץ:
 ```bash
