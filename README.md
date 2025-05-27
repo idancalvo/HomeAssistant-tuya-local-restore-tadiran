@@ -1,0 +1,56 @@
+🛠 מדריך: אוטומציה לשחזור מזגן תדיראן באינטגרציית Tuya Local לאחר אתחול Home Assistant
+במדריך זה ניצור אוטומציה שתבדוק בכל עלייה של Home Assistant אם קובץ ההתקן של מזגן תדיראן נמחק מהאינטגרציה tuya_local.
+אם הקובץ נמחק (לרוב עקב עדכון האינטגרציה) – הסקריפט ישחזר אותו אוטומטית מתיקיית גיבוי.
+
+כך תוכל לשדרג את Tuya Local בלי לדאוג למחיקת הקובץ.
+
+📁 שלב 1: יצירת תיקיית גיבוי
+ניצור את התיקייה:
+/config/protected_files/tuya_restore
+
+
+📄 שלב 2: הוספת 3 קבצים לתיקייה
+שים בתיקייה את הקבצים הבאים (מצורפים בריפו או שניתן להוריד):
+
+קובץ	תיאור
+check_tuya_file.sh                      	  סקריפט שמבצע את הבדיקה והשחזור
+tuya_restore.log	                         קובץ לוג שמתעד את פעולת הסקריפט
+tadiran_wind_heatpump.yaml	                      קובץ ההתקן שצריך לשחזר
+
+
+🔒 שלב 3: מתן הרשאות הרצה לסקריפט ותיקון שגיאת סוג קובץ
+בטרמינל של Home Assistant, הרץ:
+chmod +x /config/protected_files/tuya_restore/check_tuya_file.sh 
+ואז את זה:
+dos2unix /config/protected_files/tuya_restore/check_tuya_file.sh
+
+
+⚙️ שלב 4: הגדרת shell_command
+פתח את הקובץ configuration.yaml והוסף 2 שורות:
+shell_command:
+  restore_tuya_file: /bin/bash /config/protected_files/tuya_restore/check_tuya_file.sh
+  
+שמור את הקובץ ואתחל את המערכת או טען מחדש את ההגדרות.
+
+🤖 שלב 5: יצירת אוטומציה ב־UI
+עבור אל הגדרות
+בחר אוטומציות וסצנות
+לחץ + יצירת אוטומציה
+גורם מפעיל: כאשר Home Assistant מופעל
+פעולה: shell_command.restore_tuya_file
+שמור את האוטומציה
+
+✅ שלב 6: בדיקה ידנית
+עבור אל כלים למפתחים
+לשונית שירותים
+בחר shell_command.restore_tuya_file
+לחץ ביצוע שירות
+
+
+
+בדיקת הצלחה:
+בדוק את הקובץ בתיקייה:
+/config/custom_components/tuya_local/devices/
+פתח את קובץ הלוג:
+/config/protected_files/tuya_restore/tuya_restore.log
+אם הכל תקין, תראה שם את ההודעות שנכתבו.
